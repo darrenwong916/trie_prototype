@@ -1,0 +1,7 @@
+source 'http://rubygems.org'
+gem 'sinatra'
+gem 'pry'
+gem 'handlebars_assets'
+gem 'sinatra-websocket'
+gem 'sinatra-contrib'
+gem 'thin'
