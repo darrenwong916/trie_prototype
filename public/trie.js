@@ -3,21 +3,20 @@ Trie = function(){
 };
 
 Trie.prototype.learn = function(word, index){
-  index = index || 0
-  char = word[index];
-  // This function should add the given word,
-  // starting from the given index,
-  // to this Trie.
+  var index = index || 0
+  var char = word[index];
 
-  // It will be recursive.  It will tell
-  // the correct child of this Trie to learn the word
-  // starting from a later index.
 
-  // Consider what the learn function should do
-  // when it reaches the end of the word?
-  // A word does not necessarily end at a leaf.
-  // You must mark nodes which are the ends of words,
-  // so that the words can be reconstructed later.
+  if(this.characters[char]){
+    this.characters[char].learn(word, index+1);
+  } else{
+      if(index === word.length){
+        this.isWord = true;
+      } else {
+          this.characters[char] = new Trie();
+          this.characters[char].learn(word,index+1);
+        }
+      }
 };
 
 Trie.prototype.getWords = function(words, currentWord){
