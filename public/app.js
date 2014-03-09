@@ -44,7 +44,7 @@ App.Routers.Main = Backbone.Router.extend({
 
 App.Views.Index = Backbone.View.extend({
   id: "search_temp",
-  events: {"keyup #search_bar": "search_fnc"},
+  events: {"keyup #search_bar": "auto_complete"},
   tagName: "span",
   template: function(){ return "<form> <input id=\"search_bar\" type=\"text\"> Search field</input></form>";},
 
@@ -53,7 +53,7 @@ App.Views.Index = Backbone.View.extend({
     // alert("hellowwwworld");
     return this;
   },
-  search_fnc: function(){
+  auto_complete: function(){
       $("#titles").empty();
         var word = $("#search_bar").val();
         var results = App.autocompleter.complete(word);

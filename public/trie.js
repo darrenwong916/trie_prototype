@@ -5,7 +5,7 @@ Trie = function(){
 Trie.prototype.learn = function(word, index){
   var index = index || 0
   var char = word[index];
-  var word = word;
+
 
 
   if(this.characters[char]){
