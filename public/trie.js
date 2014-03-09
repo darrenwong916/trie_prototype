@@ -1,8 +1,23 @@
 Trie = function(){
   this.characters = {};
+  this.isWord = false;
 };
 
 Trie.prototype.learn = function(word, index){
+  index = index || 0
+  if(this.character[char]) {
+    this.character[char].learn(word, index+1)
+  }
+  else {
+    if(index === word.length-1) {
+      this.isWord = true;
+  }
+};
+  else {
+      this.character[char] = new Trie();
+      this.character.learn(word, index+1);
+
+};
   // This function should add the given word,
   // starting from the given index,
   // to this Trie.
@@ -19,6 +34,20 @@ Trie.prototype.learn = function(word, index){
 };
 
 Trie.prototype.getWords = function(words, currentWord){
+  currentWord = currentWord || '';
+  words = words || [];
+  if(this.isWord) {
+  words.push(currentWord);
+}
+
+$.each(this.characters, function(character, charTrie) {
+  if(words.length < 100) {
+      words.concat(charTrie.getWords(words, currentWord + character));
+  }
+});
+
+return words;
+
   // This function will return all the words which are
   // contained in this Trie.
   // it will use currentWord as a prefix,
@@ -33,7 +62,7 @@ Trie.prototype.find = function(word, index){
 };
 
 Trie.prototype.autoComplete = function(prefix){
-  // This function will return all completions 
+  // This function will return all completions
   // for a given prefix.
   // It should use find and getWords.
 };
