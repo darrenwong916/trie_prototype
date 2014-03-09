@@ -23,11 +23,11 @@ Trie.prototype.getWords = function(words, currentWord){
   currentWord = currentWord || '';
   words = words || [];
   if(this.isWord) {
-  words.push(currentWord);
+    words.push(currentWord);
 }
 
 $.each(this.characters, function(character, charTrie) {
-  if(words.length < 100) {
+  if(words.length < 1000) {
       words.concat(charTrie.getWords(words, currentWord + character));
   }
 });
@@ -41,14 +41,16 @@ return words;
 };
 
 Trie.prototype.find = function(word, index){
-  index = index || 0;
-  if(word.length <= index){
-    return this;
-  }
-  if(this.character[word[index]] === null) {
-    return false;
-  }
-  return this.characters[word[index]].find(word, index +1);
+  var word = word;
+  var index = index || 0;
+  var node = word[index];
+  if(this.characters[node]){
+    return this.characters[node].find(word, index+1);
+  } else if(index === word.length){
+      return this;
+    }  else {
+        return false;
+      }
 
   // This function will return the node in the trie
   // which corresponds to the end of the passed in word.
@@ -57,12 +59,10 @@ Trie.prototype.find = function(word, index){
 };
 
 Trie.prototype.autoComplete = function(prefix){
-  var complete = this.find(prefix);
-  if(complete) {
-    return complete.getWords([], prefix);
-
-  }
-  return [];
+  var node = this.find(prefix);
+  if(!node) {return [];}
+  var result = node.getWords([], prefix);
+  return node.getWords([], prefix);
 
   // This function will return all completions
   // for a given prefix.
