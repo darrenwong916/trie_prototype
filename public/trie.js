@@ -5,11 +5,12 @@ Trie = function(){
 Trie.prototype.learn = function(word, index){
   var index = index || 0
   var char = word[index];
+  var word = word;
 
 
   if(this.characters[char]){
     this.characters[char].learn(word, index+1);
-  } else{
+  } else {
       if(index === word.length){
         this.isWord = true;
       } else {
