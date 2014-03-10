@@ -50,7 +50,6 @@ App.Views.Index = Backbone.View.extend({
 
   render: function(){
     $(this.el).html(this.template());
-    // alert("hellowwwworld");
     return this;
   },
   auto_complete: function(){
@@ -59,14 +58,12 @@ App.Views.Index = Backbone.View.extend({
         var results = App.autocompleter.complete(word);
         $.each(results, function(index, value){
           $("#titles").append("<li><a href=\"https://en.wikipedia.org/wiki/"+ value + "\">"+ value + "</li>");
-          // $("#titles").html(results);
         });
   },
   auto_search: function(param){
     var results = App.autocompleter.complete(param);
      $.each(results, function(index, value){
           $("#titles").append("<li><a href=\"https://en.wikipedia.org/wiki/"+ value + "\">"+ value + "</li>");
-          // $("#titles").html(results);
         });
   }
 });
